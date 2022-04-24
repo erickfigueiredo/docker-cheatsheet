@@ -4,6 +4,72 @@ Listagem de comandos docker úteis para o dia a dia.
 
 ---
 
+- Fazer login via terminal:
+
+```bash
+docker login
+```
+
+- Fazer logout via terminal:
+
+```bash
+docker logout
+```
+
+## Imagens e Containers
+
+- Criar um container:
+
+```bash
+docker container create -ti <imagem>
+```
+
+- Iniciar o container criado (o comando run cria um novo container, o start inicia um ja criado):
+
+```bash
+docker container start <id container ou nome>
+```
+
+- Reniniciar um container:
+
+```bash
+docker container restart <id container ou nome>
+```
+
+- Pausar um container:
+
+```bash
+docker container pause <id container ou nome>
+```
+
+- Retomar um container pausado:
+
+```bash
+docker container unpause <id container ou nome>
+```
+
+- Parar um container em execução:
+
+```bash
+docker container stop <id container ou nome>
+```
+
+> Dessa forma o container será criado, mas nãos erá executado automaticamente.
+
+- Remover um container:
+
+```bash
+docker container rm <id container ou nome>
+```
+
+- Remover uma imagem:
+
+```bash
+docker image rmi <id container ou nome>
+```
+
+> Para remover um container ou imagem em execução use a flag `-f`.
+
 - Listar as imagens existentes no host:
 
 ```bash
@@ -13,7 +79,7 @@ docker image ls
 - Verificar os containeres em execução no momento:
 
 ```bash
-docker container ls
+docker container ls || docker ps
 ```
 
 Com a flag `-a` é possível visualizar todos os containeres.
@@ -27,4 +93,130 @@ docker container run <imagem>
 Caso a imagem não exista ela será baixada e inicializada. É possível adicionar flags ao comando run como `-i -t` que possibilitam a interação com o container e `-d` que inicializa o container em modo daemon (sem interação).
 > Para sair da interação com um container sem finalizá-lo usar `ctrl + p + q`.
 
-- ...
+- Expor uma porta do container:
+
+```bash
+docker run -p <porta dispositivo:porta container> <imagem>
+```
+
+> Para adicionar um nome a um container basta adicionar a flag `--name <nome_container>`
+
+- Retornar a um container em execução:
+
+```bash
+docker container <id container ou nome>
+```
+
+- Visualização de consumo dos containers:
+
+```bash
+docker container stats
+```
+
+> Para visualizar o consumo de um container em especidfico basta adicionar o `id do container` após o stats, no comando acima.
+
+- Verificar os processos de um container em execução:
+
+```bash
+docker container top <id container ou nome>
+```
+
+- Visualizar Logs de um container:
+
+```bash
+docker container logs <id container ou nome>
+```
+
+> Para  visualizar os logs à medida em que aparecem utilize a flag `-f` no comando acima.
+
+- Criar uma imagem a partir de um Dockerfile:
+
+```bash
+docker build -t <nome>:<tag> <caminho para o Dockerfile acompanhado do ponto>
+```
+
+- Subir uma imagem do repositório do docker (deve ter o mesmo nome do repositório online):
+
+```bash
+docker push <nome da imagem> 
+```
+
+- Baixar uma imagem do repositório do docker:
+
+```bash
+docker pull <nome da imagem> 
+```
+
+- Nomeando uma imagem docker (quando tag não é informado é atribuído "latest"):
+
+```bash
+docker tag <nome>:<tag>
+```
+
+- Removendo imagens e containers:
+
+```bash
+docker system prune
+```
+
+- Remover um container após a parada:
+
+```bash
+docker run --rm <nome da imagem>
+```
+
+- Copiar arquivos do container para o dispositivo:
+
+```bash
+docker cp <id container ou nome>:<caminho do arquivo no container> <caminho para onde a cópia vai no dispositivo>
+```
+
+- Analise de processamento de um container:
+
+```bash
+docker top <id container ou nome>
+```
+
+- Verificando dados de um container:
+
+```bash
+docker inspect <id container ou nome>
+```
+
+- Verificando os processos dos containers:
+
+```bash
+docker stats
+```
+
+## Volumes
+
+- Determinar um volume de persistencia de dados (será removido junto com o container):
+
+```bash
+docker run ... -v/diretorio ...
+```
+
+- Criar um volume nomeado (terá persistência, diretorio nesse caso tem que ser o mesmo de workdir):
+
+```bash
+docker run ... -v nomeVolume:/diretorio ...
+```
+
+- Listar volumes:
+
+```bash
+docker volume ls
+```
+
+- Utilizando Bind Mounts (Dados serão persistidos na máquina onde o docker está executando):
+
+```bash
+docker run ... -v <caminho do diretorio do host>:<diretorio no container> ...
+```
+
+- Criando um named volume no docker manualmente:
+
+```bash
+docker volume crate <nome do volume>
+```
