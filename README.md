@@ -300,3 +300,25 @@ docker network disconnect <id ou nome network> <id ou nome container>
 ```bash
 docker network inspect <id ou nome network>
 ```
+
+## Docker Compose
+
+- Rodando um docker-compose.yml:
+
+```bash
+docker compose up
+```
+
+> Para desocupar o terminal dos logs da aplicação, podemos aplicar a flag -d (detached)
+
+- Parando um container:
+
+```bash
+docker compose down
+```
+
+- Verificar os serviços que estão executando com o docker composer up:
+
+```bash
+docker compose ps
+```

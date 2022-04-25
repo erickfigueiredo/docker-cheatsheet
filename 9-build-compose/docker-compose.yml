@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  db:
+    build: ./mysql
+    restart: always
+    env_file:
+      - ./config/db.env
+    ports:
+      - "3306:3306"
+    networks:
+      - dockercompose
+  
+  backend:
+    dependes_on:
+      - db
+    build: './flask'
+    ports:
+      - "5000:5000"
+    restart: always
+    network:
+      - dockercompose
+
+networks:
+  dockercompose: # Já vai estabelecer o driver para bridge
