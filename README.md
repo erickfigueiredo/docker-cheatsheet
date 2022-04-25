@@ -1,6 +1,6 @@
 # Docker Cheatsheet
 
-Listagem de comandos docker úteis para o dia a dia.
+Lista de comandos Docker úteis e de uso diário.
 
 ---
 
@@ -219,4 +219,84 @@ docker run ... -v <caminho do diretorio do host>:<diretorio no container> ...
 
 ```bash
 docker volume crate <nome do volume>
+```
+
+- Inspecionar um volume:
+
+```bash
+docker volume inspect <nome do volume>
+```
+
+- Removendo um volume (todos os dados serão removidos também):
+
+```bash
+docker volume rm <nome do volume>
+```
+
+- Removendo volumes não utilizados:
+
+```bash
+docker volume prune
+```
+
+- Criar volumes apenas de leitura (Read Only):
+
+```bash
+docker run ... -v volume:/data:ro ...
+```
+
+## Networks
+
+- Listar as redes disponiveis no docker:
+
+```bash
+docker network ls
+```
+
+- Criando uma rede docker (por padrão o tipo sera bridge):
+
+```bash
+docker network create <nome da rede>
+```
+
+- Criando uma rede com um driver especifico:
+
+```bash
+docker network create -d macvlan <nome da rede>
+```
+
+- Removendo redes (cuidado com containers já conectados):
+
+```bash
+docker network rm <nome da network>
+```
+
+- Removendo redes não utilizadas (as redes criadas por padrão só serão removidas manualmente):
+
+```bash
+docker network prune
+```
+
+- Conectando um container a uma network:
+
+```bash
+docker run ... --network <id ou nome network> ...
+```
+
+- Conectar um container a uma network pós run:
+
+```bash
+docker network connect <id ou nome network> <id ou nome container>
+```
+
+- Removendo um container de uma rede especifica:
+
+```bash
+docker network disconnect <id ou nome network> <id ou nome container>
+```
+
+- Inspecionando as redes:
+
+```bash
+docker network inspect <id ou nome network>
 ```

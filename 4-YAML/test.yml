@@ -1,0 +1,25 @@
+# Este é um exemplo de comentário em YAML
+nome: "Erick" # Textos podem ter aspas
+cor: Vermelho # ou nao
+idade: 21 # Está é a idade do usuário
+
+objeto:
+  versao: 2
+  arquivo: "teste.txt"
+
+versao_completa: 3.14
+nulo: ~
+nulo_dois: null
+
+verdadeiro: True
+verdadeiro_2: true
+verdandeiro_3: On
+
+lista: [1, 2, 3, 4, 5, 6, 7]
+lista_2:
+  - 1
+  - 2
+  - 3
+  - NomeDoFulano
+
+obj: {a: 1, b: banana, c: On}
